@@ -1,4 +1,6 @@
-# Quick Guide to Poetry
+# Wiki practice
+
+## Poetry
 
 Poetry is a tool for managing dependencies and projects in Python.
 
@@ -64,6 +66,12 @@ poetry remove library_name
 
 ```bash
 poetry shell
+```
+
+### Run it
+
+```bash
+    poetry run python src/entorno_herramientas/main.py
 ```
 
 ## Python Code Standards

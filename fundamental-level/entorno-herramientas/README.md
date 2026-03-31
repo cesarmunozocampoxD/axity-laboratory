@@ -2,7 +2,7 @@
 
 A Python project providing tools and environment setup utilities.
 
-📖 **For detailed information about Poetry commands and code standards, see [DOC.md](DOC.md)**
+📖 **For detailed information about Poetry commands and code standards, see [WIKI.md](WIKI.md)**
 
 ## Prerequisites
 
