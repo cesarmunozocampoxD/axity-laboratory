@@ -1,0 +1,57 @@
+{
+    "bands": [
+        {
+            "id": 1,
+            "name": "Linkin Park",
+            "genre": "Alternative Metal",
+            "formed": 1996,
+            "country": "United States",
+            "members": [
+                "Chester Bennington",
+                "Mike Shinoda",
+                "Dave Farrell",
+                "Brad Delson",
+                "Phoenix",
+                "Joe Hahn"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Metallica",
+            "genre": "Heavy Metal",
+            "formed": 1981,
+            "country": "United States",
+            "members": [
+                "James Hetfield",
+                "Lars Ulrich",
+                "Kirk Hammett",
+                "Robert Trujillo"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Papa Roach",
+            "genre": "Nu Metal",
+            "formed": 1993,
+            "country": "United States",
+            "members": [
+                "Jacoby Shaddix",
+                "Jerry Horton",
+                "Tobin Esperance",
+                "Tony Palermo"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Sliptnot",
+            "genre": "rock",
+            "country": "US"
+        },
+        {
+            "id": 5,
+            "name": "Evanescence",
+            "genre": "rock",
+            "country": "US"
+        }
+    ]
+}
