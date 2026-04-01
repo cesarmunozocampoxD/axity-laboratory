@@ -1,0 +1,26 @@
+[project]
+name = "objetos-modelos-datos"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "cesarmunozocampoxD",email = "cesar_MunozOcampo@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.0.0",
+    "attrs>=23.1.0",
+]
+
+[tool.poetry]
+packages = [{include = "objetos_modelos_datos", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.0.0"
+isort = "^5.13.0"
+ruff = "^0.1.0"
+pre-commit = "^4.5.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
