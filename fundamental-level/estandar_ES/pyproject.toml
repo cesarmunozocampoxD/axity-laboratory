@@ -1,5 +1,5 @@
 [project]
-name = "objetos-modelos-datos"
+name = "estandar-es"
 version = "0.1.0"
 description = ""
 authors = [
@@ -8,29 +8,23 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pydantic>=2.0.0",
-    "attrs>=23.1.0",
 ]
 
 [tool.poetry]
-packages = [{include = "objetos_modelos_datos", from = "src"}]
+packages = [{include = "estandar_es", from = "src"}]
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.0.0"
 isort = "^5.13.0"
 ruff = "^0.1.0"
 pre-commit = "^4.5.1"
+pyyaml = "^6.0.0"
+logging = "^0.5.0"
 
 [tool.pyright]
 pythonVersion = "3.12"
 include = ["src/**/*.py"]
 typeCheckingMode = "basic"
-
-[tool.mypy]
-python_version = "3.12"
-warn_return_any = true
-disallow_untyped_defs = true
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

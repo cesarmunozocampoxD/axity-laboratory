@@ -1,0 +1,32 @@
+{
+  "total_bands": 30,
+  "average_formation_year": 1977.8,
+  "bands_by_country": {
+    "USA": 15,
+    "UK": 13,
+    "Australia": 1,
+    "Ireland": 1
+  },
+  "bands_by_genre": {
+    "Rock": 7,
+    "Hard Rock": 5,
+    "Grunge": 3,
+    "Alternative Rock": 3,
+    "Punk Rock": 3,
+    "Heavy Metal": 2,
+    "Indie Rock": 2,
+    "Progressive Rock": 1,
+    "Funk Rock": 1,
+    "Britpop": 1,
+    "Garage Rock": 1,
+    "Psychedelic Rock": 1
+  },
+  "bands_by_decade": {
+    "1950s": 1,
+    "1960s": 9,
+    "1970s": 6,
+    "1980s": 8,
+    "1990s": 5,
+    "2000s": 1
+  }
+}
