@@ -1,0 +1,33 @@
+[project]
+name = "acceso-datos-orm"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "cesarmunozocampoxD",email = "cesar_MunozOcampo@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.poetry]
+packages = [{include = "acceso_datos_orm", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+sqlalchemy = ">=2.0"
+alembic = ">=1.13"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
