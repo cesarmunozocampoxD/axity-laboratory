@@ -1,0 +1,30 @@
+[project]
+name = "apis-fastapi"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "cesarmunozocampoxD",email = "cesar_MunozOcampo@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[all]>=0.111.0",
+    "sqlalchemy>=2.0.0",
+    "greenlet>=3.0.0,<3.4.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "pydantic-settings>=2.0.0",
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+]
+
+[tool.poetry]
+packages = [{include = "apis_fastapi", from = "src"}]
+
+[tool.pytest.ini_options]
+pythonpath = ["src/apis_fastapi"]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
