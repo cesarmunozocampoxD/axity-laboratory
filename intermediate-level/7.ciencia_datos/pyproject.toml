@@ -1,0 +1,25 @@
+[project]
+name = "ciencia-datos"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "cesarmunozocampoxD",email = "cesar_MunozOcampo@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+]
+
+[tool.poetry]
+packages = [{include = "ciencia_datos", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.3,<10.0.0)"
+]
