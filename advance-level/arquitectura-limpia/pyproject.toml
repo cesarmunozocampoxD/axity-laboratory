@@ -1,0 +1,26 @@
+[project]
+name = "arquitectura-limpia"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "cesarmunozocampoxD",email = "cesar_MunozOcampo@hotmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "arquitectura_limpia", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.0.3,<10.0.0)"
+]
