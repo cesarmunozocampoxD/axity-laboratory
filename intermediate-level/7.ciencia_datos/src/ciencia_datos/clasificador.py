@@ -10,8 +10,8 @@ from __future__ import annotations
 from pathlib import Path
 
 import joblib  # type: ignore
-import pandas as pd
-from sklearn.tree import DecisionTreeClassifier
+import pandas as pd  # type: ignore
+from sklearn.tree import DecisionTreeClassifier  # type: ignore
 
 # Columnas de características que usa el modelo
 FEATURES = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
