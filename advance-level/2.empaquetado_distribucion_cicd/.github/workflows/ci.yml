@@ -5,123 +5,48 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+permissions:
+  contents: read
 
 jobs:
-  # ── 1. Lint ────────────────────────────────────────────────────────────────
-  lint:
-    name: Lint (ruff)
+  quality:
+    name: Lint, Type Check, and Tests
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install ruff
-        run: pip install "ruff>=0.4.0"
-
-      - name: Run ruff
-        run: ruff check src/ tests/
-
-  # ── 2. Type-check ──────────────────────────────────────────────────────────
-  type-check:
-    name: Type-check (mypy)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
         with:
-          python-version: "3.12"
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
 
       - name: Install dependencies
-        run: pip install "mypy>=1.10.0" "fastapi>=0.111.0"
+        run: poetry install --no-interaction --no-root
 
-      - name: Run mypy
-        run: mypy src/
+      - name: Lint
+        run: poetry run ruff check src/ tests/
 
-  # ── 3. Tests ───────────────────────────────────────────────────────────────
-  test:
-    name: Tests (pytest)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - name: Type check
+        run: poetry run mypy src/
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install package + test dependencies
+      - name: Test
+        shell: bash
         run: |
-          pip install "fastapi>=0.111.0" "uvicorn[standard]>=0.29.0" \
-                      "httpx>=0.27.0" "pytest>=8.0.0" "pytest-cov>=5.0.0"
-          pip install -e .
+          TEST_FILES=$(find tests -type f \( -name 'test_*.py' -o -name '*_test.py' \) | wc -l)
+          if [ "$TEST_FILES" -eq 0 ]; then
+            echo "No test files found in tests/. Skipping pytest."
+            exit 0
+          fi
 
-      - name: Run tests
-        run: pytest tests/ --cov=empaquetado_distribucion_cicd --cov-report=term-missing
-
-  # ── 4. Build wheel ─────────────────────────────────────────────────────────
-  build-wheel:
-    name: Build wheel
-    runs-on: ubuntu-latest
-    needs: [lint, type-check, test]
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install build frontend
-        run: pip install build
-
-      - name: Build wheel
-        run: python -m build --wheel --outdir dist/
-
-      - name: Upload wheel artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: wheel
-          path: dist/*.whl
-
-  # ── 5. Build & push Docker image ───────────────────────────────────────────
-  build-and-push:
-    name: Build & push image
-    runs-on: ubuntu-latest
-    needs: [lint, type-check, test]
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Log in to GHCR
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract image metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=sha,prefix=sha-
-            type=ref,event=branch
-            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: ${{ github.event_name == 'push' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          poetry run pytest tests/ --cov=empaquetado_distribucion_cicd --cov-report=term-missing

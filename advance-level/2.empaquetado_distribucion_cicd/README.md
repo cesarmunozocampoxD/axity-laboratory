@@ -140,14 +140,8 @@ The workflow at [.github/workflows/ci.yml](.github/workflows/ci.yml) is triggere
 push / PR to main
     ├── lint        →  ruff check src/ tests/
     ├── type-check  →  mypy src/
-    └── test        →  pytest --cov
-            ↓ (all pass)
-    ├── build-wheel →  python -m build  →  uploads .whl artifact
-    └── build-and-push → docker buildx → ghcr.io/<owner>/<repo>
-                          tags: sha-<sha>, <branch>, latest (on main)
+    └── test        →  pytest --cov (skips if no test files are present)
 ```
-
-The Docker image is pushed to **GitHub Container Registry (GHCR)** using `GITHUB_TOKEN` — no extra secrets required.
 
 ---
 
